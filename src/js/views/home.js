@@ -20,7 +20,7 @@ export const Home = () => (
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Adress" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="Adress" placeholder="Adress" />
+                    <input type="text" className="form-control" id="Adress" placeholder="Address" />
                 </div>
                 <button type="submit" className="btn btn-primary w-100 mb-4">Save</button>
             </form>
