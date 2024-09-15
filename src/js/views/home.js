@@ -31,8 +31,19 @@ export const Home = () => {
                     <label htmlFor="Adress" className="form-label">Address</label>
                     <input type="text" className="form-control" id="Adress" placeholder="Address"  onChange={(e) => setInputAddress(e.target.value)} value={inputAddress} />
                 </div>
-                <button onClick={()=> {actions.addNewContact(inputName, inputPhone, inputEmail, inputAddress); setInputname(""); setInputPhone("");
-                    setInputEmail("") ; setInputAddress("")}} type="submit" className="btn btn-primary w-100 mb-4">Save</button>
+                <button onClick={()=> {
+                    if(store.contactId.length == 1){
+                        actions.postContact(inputName, inputPhone, inputEmail, inputAddress)
+                    } else {
+                        actions.addNewContact(inputName, inputPhone, inputEmail, inputAddress);
+                    }
+                    
+                     setInputname(""); 
+                     setInputPhone("");
+                     setInputEmail("") ; 
+                     setInputAddress("")}} 
+                    
+                    type="submit" className="btn btn-primary w-100 mb-4">Save</button>
             </form>
             <Link to="/demo">
                 or get back to contacts

@@ -3,6 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			 contacs: [
 				
+			],
+			contactId: [
+
 			]
 		},
 		actions: {
@@ -55,8 +58,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 						.then((data)=> setStore({contacs: data.contacts}))
 					})
 			}, 
-			editContact: (idContact) => {
+			idContactToPost: (idContact) => {
 				console.log("se va a editar el contacto con el id " + idContact)
+				const store = getStore();
+				setStore({contactId: [idContact]})
+				console.log(store.contactId)
+				console.log("el array tiene " + store.contactId)
+			},
+			postContact: (newname, newphone, newemail, newaddress) => {
+				const store = getStore();
+				console.log("el array tiene " + store.contactId)
+				fetch("https://playground.4geeks.com/contact/agendas/nicolle/contacts/" + store.contactId,
+					{method: 'PUT', 
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify({
+						   "name": newname,
+						   "phone": newphone,
+						   "email": newemail,
+						   "address": newaddress
+					   
+					   }),
+					   redirect: "follow"
+					   })
+						.then((response) => response.text())
+  						.then(() => {
+							fetch("https://playground.4geeks.com/contact/agendas/nicolle/contacts")
+								.then((response)=> response.json())
+								.then((data)=> setStore({contacs: data.contacts}))
+						})
+			
 			},
 			changeColor: (index, color) => {
 				//get the store
