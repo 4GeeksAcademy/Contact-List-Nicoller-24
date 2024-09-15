@@ -1,32 +1,42 @@
-import React from "react";
-import "../../styles/home.css";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
-export const Home = () => (
-	<div className="container" style={{ backgroundColor: "white", width: "70%", paddingBottom: "10%" }}>
+export const Home = () => {
+    const [inputName, setInputname] = useState("")
+    const [inputEmail, setInputEmail] = useState("")
+    const [inputPhone, setInputPhone] = useState("")
+    const [inputAddress, setInputAddress] = useState("")
+	const { store, actions } = useContext(Context);
+
+     
+    return (
+        <div className="container" style={{ backgroundColor: "white", width: "70%", paddingBottom: "10%" }}>
             <h1 style={{ marginLeft: "30%" }}>Add a new contact</h1>
             <form>
                 <div className="mb-3">
                     <label htmlFor="Fullname" className="form-label">Full name</label>
-                    <input type="text" className="form-control" id="Fullname" placeholder="Full name"/>
+                    <input type="text" className="form-control" id="Fullname" placeholder="Full name"   
+                            onChange={(e) => setInputname(e.target.value)} value={inputName}/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Email" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="Email" placeholder="Email" />
+                    <input type="email" className="form-control" id="Email" placeholder="Email"  onChange={(e) => setInputEmail(e.target.value)} value={inputEmail} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Phone" className="form-label">Phone</label>
-                    <input type="text" className="form-control" id="Phone" placeholder="Phone" />
+                    <input type="text" className="form-control" id="Phone" placeholder="Phone"  onChange={(e) => setInputPhone(e.target.value)} value={inputPhone} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="Adress" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="Adress" placeholder="Address" />
+                    <input type="text" className="form-control" id="Adress" placeholder="Address"  onChange={(e) => setInputAddress(e.target.value)} value={inputAddress} />
                 </div>
-                <button type="submit" className="btn btn-primary w-100 mb-4">Save</button>
+                <button onClick={()=> {actions.addNewContact(inputName, inputPhone, inputEmail, inputAddress); setInputname(""); setInputPhone("");
+                    setInputEmail("") ; setInputAddress("")}} type="submit" className="btn btn-primary w-100 mb-4">Save</button>
             </form>
-			<Link to="/demo">
-				<a href="#">or get back to contacts</a>
-			</Link>
-            
+            <Link to="/demo">
+                or get back to contacts
+            </Link>
         </div>
-);
+    );
+}
