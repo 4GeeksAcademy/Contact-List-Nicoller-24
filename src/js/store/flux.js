@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				)
   					.then((response) => response.text())
-					.then(()=> loadSomeData())
+					.then(()=> getActions().loadSomeData())
 				 
 				//setStore({ contacs: store.contacs.filter((contacto, index) => contacto.id != idToDelete) });
 
@@ -48,11 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 					} )
 					.then((response) => response.text())
-					.then(()=>{
-						fetch("https://playground.4geeks.com/contact/agendas/nicolle/contacts")
-						.then((response)=> response.json())
-						.then((data)=> setStore({contacs: data.contacts}))
-					})
+					.then(()=> getActions().loadSomeData())
 			}, 
 			idContactToPost: (idContact) => {
 				console.log("se va a editar el contacto con el id " + idContact)
@@ -77,11 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					   redirect: "follow"
 					   })
 						.then((response) => response.text())
-  						.then(() => {
-							fetch("https://playground.4geeks.com/contact/agendas/nicolle/contacts")
-								.then((response)=> response.json())
-								.then((data)=> setStore({contacs: data.contacts}))
-						})
+  						.then(() => getActions().loadSomeData())
 			
 			},
 			changeColor: (index, color) => {
