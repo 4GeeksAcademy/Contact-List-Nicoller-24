@@ -29,11 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				)
   					.then((response) => response.text())
-					.then(()=> {
-						fetch("https://playground.4geeks.com/contact/agendas/nicolle/contacts")
-						.then((response)=> response.json())
-						.then((data)=> setStore({contacs: data.contacts}))
-					})
+					.then(()=> loadSomeData())
 				 
 				//setStore({ contacs: store.contacs.filter((contacto, index) => contacto.id != idToDelete) });
 
